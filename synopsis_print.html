@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Synopsis - AuraDX</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 18mm 18mm 18mm 18mm;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 10.5pt;
+            line-height: 1.25;
+            color: #111;
+            background-color: #f4f4f4;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 16mm 18mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                width: 100%;
+                min-height: auto;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page:last-child {
+                page-break-after: avoid;
+            }
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header h2 {
+            font-size: 11pt;
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
+        .header h3 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        .header .meta {
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        h2.section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: #e8e8e8;
+            padding: 3px 6px;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            border-left: 4px solid #333;
+        }
+
+        h3.sub-title {
+            font-size: 10.5pt;
+            font-weight: bold;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            margin-left: 18px;
+            margin-bottom: 5px;
+        }
+
+        li {
+            margin-bottom: 2px;
+            text-align: justify;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 5px 0 8px 0;
+            font-size: 9.5pt;
+        }
+
+        table, th, td {
+            border: 1px solid #444;
+        }
+
+        th {
+            background-color: #efefef;
+            padding: 4px 6px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 3px 6px;
+            vertical-align: top;
+        }
+
+        .signature-block {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px dashed #666;
+        }
+
+        .sig-row {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .sig-col {
+            width: 30%;
+            border-top: 1px solid #000;
+            padding-top: 4px;
+            font-size: 9.5pt;
+        }
+
+        .sig-col-guide {
+            width: 45%;
+            border-top: 1px solid #000;
+            padding-top: 4px;
+            font-size: 9.5pt;
+        }
+
+        .page-num {
+            text-align: right;
+            font-size: 8.5pt;
+            color: #555;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================= -->
+    <!--                            PAGE 1                                 -->
+    <!-- ================================================================= -->
+    <div class="page">
+        <div>
+            <div class="header">
+                <h1>Nowrosjee Wadia College, Pune – 411 001</h1>
+                <h2>(Autonomous & Affiliated to Savitribai Phule Pune University)</h2>
+                <h3>Department of Computer Science & Data Science</h3>
+                <div class="meta">Academic Year 2024–2025 / 2025–2026 &nbsp;|&nbsp; Project Synopsis</div>
+            </div>
+
+            <h2 class="section-title">1. Basic & Team Details</h2>
+            <table>
+                <tr>
+                    <th style="width: 25%;">Project Title</th>
+                    <td><strong>AuraDX: Dual-Engine Symptom Classifier using NLP & Structured Machine Learning</strong></td>
+                </tr>
+                <tr>
+                    <th>Domain / Track</th>
+                    <td>Data Science / Natural Language Processing & Applied Machine Learning</td>
+                </tr>
+                <tr>
+                    <th>Student Names</th>
+                    <td><strong>Nishant, Yash, Suraj</strong></td>
+                </tr>
+                <tr>
+                    <th>Roll Number(s)</th>
+                    <td><strong>DS2521</strong></td>
+                </tr>
+                <tr>
+                    <th>Department & College</th>
+                    <td>Department of Data Science, Nowrosjee Wadia College, Pune</td>
+                </tr>
+                <tr>
+                    <th>Class</th>
+                    <td>_________________________________________________________________</td>
+                </tr>
+                <tr>
+                    <th>Faculty / Mentor</th>
+                    <td>_________________________________________________ <em>(To be assigned by Faculty)</em></td>
+                </tr>
+            </table>
+
+            <h2 class="section-title">2. Project Description & Problem Statement</h2>
+            <h3 class="sub-title">2.1 Project Description & Background</h3>
+            <p>
+                In clinical outpatient environments, medical triage is a vital diagnostic gateway where incoming patient symptoms are prioritized for care. Conventional hospital triage relies heavily on manual questioning by clinical staff, leading to cognitive fatigue, operational bottlenecks, and triage variability during peak hours. <strong>AuraDX</strong> is an AI-assisted Clinical Decision Support System (CDSS) that introduces a dual-paradigm architecture:
+            </p>
+            <ul>
+                <li><strong>Unstructured NLP Engine:</strong> Employs text cleaning, WordNet lemmatization, TF-IDF vectorization, and Logistic Regression on conversational narratives (<em>Symptom2Disease</em>) to evaluate natural language patient self-descriptions.</li>
+                <li><strong>Structured ML Engine:</strong> Implements a compressed Random Forest Classifier trained across 377 binary symptom flags covering 673 unique diseases (<em>Diseases & Symptoms</em>) for clinical intake checklists.</li>
+            </ul>
+            <p>
+                Both engines are integrated into a single, responsive Flask web application providing side-by-side comparative predictions and real-time confidence scores.
+            </p>
+
+            <h3 class="sub-title">2.2 Problem Statement</h3>
+            <p>
+                Healthcare intake processes suffer from three primary bottlenecks: (1) <em>Narrative Subjectivity:</em> Patient self-descriptions are noisy, ambiguous, and non-standardized; (2) <em>High Class Cardinality:</em> Comprehensive symptom checklists encompass hundreds of diseases with overlapping presentations; (3) <em>Lack of Comparative Dual Verification:</em> Current tools evaluate either text or checklists in isolation without cross-paradigm verification.
+            </p>
+
+            <h2 class="section-title">3. Existing System & Its Limitations</h2>
+            <p>
+                <strong>Existing System:</strong> Current methods rely on manual clerical documentation, static rule-based lookups, or generic single-format internet symptom checkers (e.g., WebMD, basic keyword searches).
+            </p>
+            <ul>
+                <li><strong>No Comparative Cross-Validation:</strong> Systems operate exclusively on either structured forms or simple keyword searches, lacking multi-model verification.</li>
+                <li><strong>Fragility to Colloquial Language:</strong> Rule-based systems fail to handle typos, synonyms, or conversational phrasing.</li>
+                <li><strong>High Memory Footprint:</strong> Uncompressed high-cardinality multi-class models exceed 6+ GB, preventing local clinic deployment.</li>
+                <li><strong>Throughput Delays:</strong> Manual triage intake causes severe backlogs during peak outpatient intake.</li>
+            </ul>
+
+            <h2 class="section-title">4. Proposed System & Key Advantages</h2>
+            <p>
+                AuraDX solves these shortcomings by deploying two complementary machine learning engines into a unified platform:
+            </p>
+            <ul>
+                <li><strong>Dual-Paradigm Assessment:</strong> Evaluates free-form narrative descriptions (NLP: 95.8% accuracy over 24 diseases) and structured symptom vectors (ML: 81.8% accuracy over 673 diseases) simultaneously.</li>
+                <li><strong>Memory-Compressed Deployment:</strong> Gzip serialization reduces model size from 6.6 GB to 41.4 MB (160x reduction) for instant cold starts.</li>
+                <li><strong>Interactive Triage Dashboard:</strong> A lightweight Flask web application with a glassmorphic UI displaying live confidence meters.</li>
+            </ul>
+        </div>
+
+        <div class="page-num">Page 1 of 2</div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!--                            PAGE 2                                 -->
+    <!-- ================================================================= -->
+    <div class="page">
+        <div>
+            <h2 class="section-title">5. Project Scope & Measurable Objectives</h2>
+            <p><strong>Project Scope:</strong></p>
+            <ul>
+                <li><em>In-Scope:</em> Automated text preprocessing (NLTK), high-cardinality multi-class classification on 19,700+ records, compressed model persistence, and a live web application dashboard.</li>
+                <li><em>Out-of-Scope (Boundaries):</em> AuraDX is an academic decision-support prototype and does not replace certified physician diagnoses or autonomously prescribe medication. Direct live EHR integration is reserved for future iterations.</li>
+            </ul>
+            <p><strong>Specific Objectives:</strong></p>
+            <ul>
+                <li>Train an NLP text classification pipeline achieving >90% accuracy on natural language symptom descriptions.</li>
+                <li>Train a compressed 50-tree Random Forest classifier across 673 diseases with memory-safe chunked loading.</li>
+                <li>Implement model persistence via Joblib compression to reduce file size from 6.6 GB to under 45 MB.</li>
+                <li>Develop a full-stack Flask web application displaying side-by-side comparative predictions and confidence scores.</li>
+            </ul>
+
+            <h2 class="section-title">6. Key Features & Functional Modules</h2>
+            <ul>
+                <li><strong>Module 1 — NLP Preprocessing Pipeline:</strong> Strips punctuation, removes stopwords, performs WordNet lemmatization, and builds TF-IDF n-gram matrices.</li>
+                <li><strong>Module 2 — Structured Multi-Class Classifier:</strong> Evaluates 377 symptom flags across 673 diseases via an optimized Random Forest ensemble.</li>
+                <li><strong>Module 3 — Model Serialization & Compression:</strong> Compresses sparse probability matrices into compact <code>.joblib</code> binaries for sub-second execution.</li>
+                <li><strong>Module 4 — Keyword Symptom Mapper:</strong> Scans free-form user text, matches keywords against the 377 symptom vocabulary, and builds binary feature vectors on the fly.</li>
+                <li><strong>Module 5 — AuraDX Interactive Dashboard:</strong> A glassmorphic dark-mode web interface with quick-tag insertion and animated confidence meters.</li>
+            </ul>
+
+            <h2 class="section-title">7. System Requirements</h2>
+            <table>
+                <tr>
+                    <th style="width: 25%;">Hardware Requirements</th>
+                    <td><strong>Processor:</strong> Intel Core i3/i5 or AMD Ryzen 5 &nbsp;|&nbsp; <strong>RAM:</strong> 8 GB (16 GB recommended)<br><strong>Storage:</strong> 1 GB Free Disk Space &nbsp;|&nbsp; <strong>Display:</strong> Standard HD Monitor (1920x1080)</td>
+                </tr>
+                <tr>
+                    <th>Software Requirements</th>
+                    <td><strong>OS:</strong> Windows 10/11 or Ubuntu Linux &nbsp;|&nbsp; <strong>Language:</strong> Python 3.10 / 3.11+<br><strong>Web Framework:</strong> Flask 3.0+ &nbsp;|&nbsp; <strong>IDE:</strong> Visual Studio Code</td>
+                </tr>
+                <tr>
+                    <th>Libraries & Tools</th>
+                    <td>Scikit-Learn, Pandas, NumPy, NLTK, Joblib, Matplotlib, Seaborn, Git/GitHub, HTML5, Vanilla CSS3, JavaScript</td>
+                </tr>
+            </table>
+
+            <h2 class="section-title">8. Project Methodology & Phase-Wise Timeline</h2>
+            <table>
+                <tr>
+                    <th style="width: 22%;">Phase</th>
+                    <th style="width: 15%;">Duration</th>
+                    <th>Activities & Deliverables</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Topic Selection</strong></td>
+                    <td>Week 1–2</td>
+                    <td>Formulated clinical decision-support scope; finalized dual-model architecture.</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Data Collection</strong></td>
+                    <td>Week 3–4</td>
+                    <td>Collected <em>Symptom2Disease</em> (text) and <em>disease_symptoms</em> (structured) datasets from Kaggle.</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Literature Survey</strong></td>
+                    <td>Week 5–6</td>
+                    <td>Surveyed healthcare NLP benchmarks, multi-class decision trees, and triage workflows.</td>
+                </tr>
+                <tr>
+                    <td><strong>4. Data Processing</strong></td>
+                    <td>Week 7–8</td>
+                    <td>Built text cleaning pipeline, WordNet lemmatization, and chunked CSV sampling logic.</td>
+                </tr>
+                <tr>
+                    <td><strong>5. Model Development</strong></td>
+                    <td>Week 9–11</td>
+                    <td>Trained TF-IDF Logistic Regression and memory-compressed Random Forest models.</td>
+                </tr>
+                <tr>
+                    <td><strong>6. Testing & Evaluation</strong></td>
+                    <td>Week 12–13</td>
+                    <td>Benchmarked Accuracy, Macro Recall, Macro F1, and plotted confusion matrices.</td>
+                </tr>
+                <tr>
+                    <td><strong>7. Web Development</strong></td>
+                    <td>Week 14</td>
+                    <td>Built Flask backend (<code>app.py</code>), glassmorphic UI, and live dual-inference endpoints.</td>
+                </tr>
+                <tr>
+                    <td><strong>8. Documentation</strong></td>
+                    <td>Week 15</td>
+                    <td>Prepared project synopsis, case study writeup, and codebase documentation.</td>
+                </tr>
+                <tr>
+                    <td><strong>9. Final Presentation</strong></td>
+                    <td>Week 16</td>
+                    <td>Demonstration of AuraDX web dashboard, project defense viva, and final submission.</td>
+                </tr>
+            </table>
+
+            <div class="signature-block">
+                <div class="sig-row">
+                    <div class="sig-col">
+                        (Student Signature)<br>
+                        <strong>Nishant (DS2521)</strong>
+                    </div>
+                    <div class="sig-col">
+                        (Student Signature)<br>
+                        <strong>Yash (DS2521)</strong>
+                    </div>
+                    <div class="sig-col">
+                        (Student Signature)<br>
+                        <strong>Suraj (DS2521)</strong>
+                    </div>
+                </div>
+                <div class="sig-row" style="margin-top: 25px;">
+                    <div class="sig-col-guide">
+                        (Internal Project Guide)<br>
+                        Department of Data Science<br>
+                        Nowrosjee Wadia College, Pune
+                    </div>
+                    <div class="sig-col-guide">
+                        (Head of the Department)<br>
+                        Department of Data Science<br>
+                        Nowrosjee Wadia College, Pune
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-num">Page 2 of 2</div>
+    </div>
+
+</body>
+</html>

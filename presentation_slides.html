@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraDX - Project Presentation Deck | Nowrosjee Wadia College</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mermaid.js for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                darkMode: true,
+                background: '#1e293b',
+                primaryColor: '#0ea5e9',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#38bdf8',
+                lineColor: '#06b6d4',
+                secondaryColor: '#10b981',
+                tertiaryColor: '#1e293b'
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(24, 34, 53, 0.85);
+            --card-border: rgba(56, 189, 248, 0.2);
+            --accent-cyan: #38bdf8;
+            --accent-teal: #14b8a6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-main: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* Top Bar */
+        .top-navbar {
+            height: 54px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-box i {
+            color: var(--accent-cyan);
+            font-size: 20px;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name span {
+            color: var(--accent-cyan);
+        }
+
+        .college-tag {
+            font-size: 11px;
+            color: var(--text-muted);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            padding-left: 12px;
+        }
+
+        .controls-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-ctrl {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-ctrl:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-muted);
+            min-width: 65px;
+            text-align: center;
+        }
+
+        /* Slide Viewport */
+        .slides-viewport {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 32px;
+        }
+
+        .slide {
+            position: absolute;
+            width: calc(100% - 64px);
+            height: calc(100% - 48px);
+            max-width: 1340px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(60px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 32px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+
+        .slide-header {
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
+            position: relative;
+        }
+
+        .slide-category {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-cyan);
+            margin-bottom: 4px;
+        }
+
+        .slide-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            flex: 1;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            flex: 1;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-cyan { border-top: 3px solid var(--accent-cyan); }
+        .card-emerald { border-top: 3px solid var(--accent-emerald); }
+        .card-amber { border-top: 3px solid var(--accent-amber); }
+        .card-blue { border-top: 3px solid #3b82f6; }
+        .card-red { border-top: 3px solid var(--accent-red); }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 16px;
+        }
+
+        ul.styled-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        ul.styled-list li {
+            position: relative;
+            padding-left: 20px;
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        ul.styled-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Tables */
+        .sample-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .sample-table th, .sample-table td {
+            padding: 9px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sample-table th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 10.5px;
+            letter-spacing: 0.5px;
+        }
+
+        .sample-table tr:hover {
+            background: rgba(56, 189, 248, 0.04);
+        }
+
+        .badge-pill {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10.5px;
+            font-weight: 600;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent-cyan);
+        }
+
+        .badge-green {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-emerald);
+        }
+
+        /* Speaker Notes Drawer */
+        .speaker-drawer {
+            position: fixed;
+            bottom: 50px;
+            left: 32px;
+            right: 32px;
+            max-height: 180px;
+            background: #0f172a;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+            display: none;
+            overflow-y: auto;
+            z-index: 90;
+        }
+
+        .speaker-drawer.show {
+            display: block;
+        }
+
+        .speaker-header {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .speaker-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        /* Bottom Controls */
+        .bottom-bar {
+            height: 48px;
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Mockup screens */
+        .mockup-box {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <div class="brand-box">
+            <i class="fa-solid fa-notes-medical"></i>
+            <div class="brand-name">Aura<span>DX</span></div>
+            <div class="college-tag">Nowrosjee Wadia College, Pune • Dept of Data Science</div>
+        </div>
+        <div class="controls-box">
+            <button class="btn-ctrl" onclick="toggleSpeakerNotes()"><i class="fa-solid fa-microphone-lines"></i> Speaker Notes (N)</button>
+            <button class="btn-ctrl" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+            <div id="slide-num" class="slide-counter">1 / 12</div>
+            <button class="btn-ctrl" onclick="nextSlide()">Next <i class="fa-solid fa-chevron-right"></i></button>
+            <button class="btn-ctrl" onclick="toggleFullScreen()"><i class="fa-solid fa-expand"></i> Fullscreen</button>
+        </div>
+    </header>
+
+    <!-- Slides Viewport -->
+    <main class="slides-viewport">
+
+        <!-- SLIDE 1: Title Slide -->
+        <section class="slide active" id="slide-1" data-speaker="Welcome everyone and esteemed faculty members. Today, our team—Nishant, Yash, and Suraj—is presenting our project: AuraDX, a Dual-Engine Symptom Classifier combining Natural Language Processing and High-Dimensional Machine Learning for outpatient clinical triage.">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding: 20px;">
+                <div style="display:inline-block; padding: 6px 16px; border-radius: 20px; background: rgba(56, 189, 248, 0.1); border: 1px solid var(--accent-cyan); color: var(--accent-cyan); font-size: 12px; font-weight: 700; margin-bottom: 16px; letter-spacing: 1px;">
+                    NOWROSJEE WADIA COLLEGE, PUNE – 411 001
+                </div>
+                <h1 style="font-size: 46px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+                    Aura<span style="color:var(--accent-cyan);">DX</span>
+                </h1>
+                <h2 style="font-size: 24px; font-weight: 600; color: #cbd5e1; max-width: 900px; margin-bottom: 16px;">
+                    Dual-Engine Symptom Classifier using NLP & Structured Machine Learning
+                </h2>
+                <p style="font-size: 15px; color: var(--text-muted); max-width: 750px; line-height: 1.6; margin-bottom: 30px;">
+                    An AI-Assisted Clinical Decision Support System (CDSS) unifying free-text patient narratives with high-cardinality clinical symptom vectors for real-time outpatient triage.
+                </p>
+
+                <div style="display:flex; gap: 24px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255,255,255,0.08); padding: 14px 28px; border-radius: 12px;">
+                    <div>
+                        <div style="font-size: 11px; color: var(--text-muted);">TEAM MEMBERS</div>
+                        <div style="font-size: 14px; font-weight: 700; color: var(--accent-cyan);">Nishant • Yash • Suraj</div>
+                    </div>
+                    <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
+                        <div style="font-size: 11px; color: var(--text-muted);">ROLL NUMBER</div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">DS2521</div>
+                    </div>
+                    <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 20px;">
+                        <div style="font-size: 11px; color: var(--text-muted);">DEPARTMENT</div>
+                        <div style="font-size: 14px; font-weight: 700; color: var(--accent-emerald);">Data Science (SPPU)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: Introduction, Purpose & Objectives -->
+        <section class="slide" id="slide-2" data-speaker="In outpatient clinics, triage is a critical first step where patient intake information must be assessed rapidly. However, manual inquiry suffers from cognitive fatigue and high variability. In our project, we formulated four measurable objectives: achieving over 90% accuracy on conversational text, scaling Random Forest across 673 diseases, compressing model size from 6.6 GB to under 45 MB, and building a responsive web dashboard.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 2 • Project Foundations</div>
+                <div class="slide-title">Introduction, Purpose & Specific Objectives</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-hospital-user" style="color:var(--accent-cyan);"></i> Problem Context & Purpose</div>
+                    <ul class="styled-list">
+                        <li><strong>The Outpatient Bottleneck:</strong> Clinical triage is the time-critical intake process that determines patient acuity. Traditional verbal inquiry by triage staff leads to cognitive fatigue and patient queue delays during peak surges.</li>
+                        <li><strong>Two Distinct Modalities:</strong> Real-world medical data arrives either as <em>conversational free-text</em> (patient stories) or as <em>structured clinical checklists</em> (nursing forms).</li>
+                        <li><strong>Project Purpose:</strong> AuraDX delivers a dual-paradigm Clinical Decision Support System (CDSS) providing side-by-side diagnostic verification to assist clinical triage staff in sub-second time.</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-bullseye" style="color:var(--accent-emerald);"></i> Specific Measurable Objectives</div>
+                    <ul class="styled-list">
+                        <li><strong>Objective 1 (NLP Accuracy):</strong> Design and train a text classification pipeline achieving <strong>>90% accuracy</strong> (achieved 96.0%) on natural language symptom descriptions using NLTK lemmatization and TF-IDF Logistic Regression.</li>
+                        <li><strong>Objective 2 (High-Cardinality ML):</strong> Train an ensemble Random Forest classifier predicting across <strong>673 distinct diseases</strong> mapped from 377 symptom flags.</li>
+                        <li><strong>Objective 3 (160x Compression):</strong> Compress the massive ensemble binary from <strong>6.6 GB down to 41.4 MB</strong> using Joblib gzip compression (level 3) for fast cold boots.</li>
+                        <li><strong>Objective 4 (Live Dashboard):</strong> Build and deploy a responsive Flask web interface with animated confidence meters and instant keyword mapping.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Team Details & Roles -->
+        <section class="slide" id="slide-3" data-speaker="Here are the team details and task breakdown. All team members share roll number DS2521. Nishant led the ML architecture, high-cardinality Random Forest training, and model compression. Yash engineered the NLP pipeline, text cleaning, and TF-IDF vectorization. Suraj built the full-stack Flask application, glassmorphic UI, and system integration.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 3 • Team Details</div>
+                <div class="slide-title">Team Structure & Individual Contributions</div>
+            </div>
+            <div class="grid-3">
+                <div class="card card-cyan">
+                    <div style="font-size: 20px; font-weight: 700; color: var(--accent-cyan); margin-bottom: 2px;">Nishant</div>
+                    <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Roll No: DS2521</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Dept. of Data Science</div>
+                    <div class="badge-pill" style="margin-bottom: 14px;">Project Lead & ML Architecture</div>
+                    <ul class="styled-list">
+                        <li>Designed the dual-engine ML paradigm and overall system architecture.</li>
+                        <li>Engineered the 50-tree Random Forest mapping 377 binary features to 673 diseases.</li>
+                        <li>Implemented chunked dataset loading (chunksize=25,000) to prevent memory crashes.</li>
+                        <li>Architected Joblib gzip level 3 compression, shrinking binaries from 6.6 GB to 41.4 MB.</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div style="font-size: 20px; font-weight: 700; color: var(--accent-emerald); margin-bottom: 2px;">Yash</div>
+                    <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Roll No: DS2521</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Dept. of Data Science</div>
+                    <div class="badge-pill badge-green" style="margin-bottom: 14px;">NLP & Preprocessing Specialist</div>
+                    <ul class="styled-list">
+                        <li>Built the text sanitization, stopword removal, and WordNet lemmatization pipeline.</li>
+                        <li>Configured TF-IDF n-gram vectorizer (unigrams + bigrams, 3,000 max features).</li>
+                        <li>Trained multi-class Logistic Regression yielding 96.0% accuracy across 24 diseases.</li>
+                        <li>Plotted high-resolution confusion matrix heatmaps and generated classification metrics.</li>
+                    </ul>
+                </div>
+                <div class="card card-amber">
+                    <div style="font-size: 20px; font-weight: 700; color: var(--accent-amber); margin-bottom: 2px;">Suraj</div>
+                    <div style="font-size: 13px; font-weight: 600; color: #ffffff;">Roll No: DS2521</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 12px;">Dept. of Data Science</div>
+                    <div class="badge-pill" style="background:rgba(245,158,11,0.15); color:var(--accent-amber); margin-bottom: 14px;">Full-Stack & Integration Engineer</div>
+                    <ul class="styled-list">
+                        <li>Developed the asynchronous Flask REST API controller (src/app.py) & endpoints.</li>
+                        <li>Designed the responsive Glassmorphic dark-mode frontend (HTML5/CSS3).</li>
+                        <li>Engineered client-side JavaScript for dynamic symptom tags and animated progress bars.</li>
+                        <li>Built interactive CLI loops (predict.py) and executed end-to-end integration testing.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Existing System & Limitations -->
+        <section class="slide" id="slide-4" data-speaker="Slide 4 examines existing clinical triage systems and their limitations. Traditional systems rely on manual clinical documentation or generic single-format symptom checkers like WebMD. Their critical limitations include no dual cross-verification, high vulnerability to patient narrative noise, long patient queues, and massive memory overhead when handling hundreds of disease classes.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 4 • Problem Analysis</div>
+                <div class="slide-title">Existing System & Critical Limitations</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-amber">
+                    <div class="card-title"><i class="fa-solid fa-clipboard-list" style="color:var(--accent-amber);"></i> Existing System Overview</div>
+                    <ul class="styled-list">
+                        <li><strong>Manual Verbal Intake:</strong> Triage nurses and clinical clerks interview arriving patients and manually enter symptoms into paper forms or legacy EHR portals.</li>
+                        <li><strong>Generic Web Checkers:</strong> Consumer websites (such as WebMD or rudimentary symptom search bars) rely on basic keyword matching or rigid, hardcoded decision trees.</li>
+                        <li><strong>Single-Format Silos:</strong> Existing software tools operate strictly on <em>one format</em>: either free-text search OR a closed checkbox questionnaire—never both simultaneously.</li>
+                        <li><strong>Rule-Based Rigidity:</strong> Keyword matchers cannot interpret colloquial variations or complex descriptions (e.g., 'feeling woozy and spinning' vs 'vertigo').</li>
+                    </ul>
+                </div>
+                <div class="card card-red">
+                    <div class="card-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> Critical Limitations</div>
+                    <ul class="styled-list">
+                        <li><strong>No Dual Cross-Validation:</strong> Predictions are made in isolation without comparative model verification, drastically increasing false-positive risks.</li>
+                        <li><strong>Vocabulary & Syntactic Fragility:</strong> Misspellings, synonyms, and narrative noise trigger false alarms or complete lookup failures.</li>
+                        <li><strong>Scalability & Queuing Bottlenecks:</strong> Manual triage causes severe patient queues during peak outpatient admission hours, increasing nurse cognitive fatigue.</li>
+                        <li><strong>Prohibitive Memory Overhead:</strong> Scaling multi-class ensembles across 600+ diseases creates 6+ GB uncompressed model binaries, preventing local deployment on clinical workstations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Proposed System & Key Features -->
+        <section class="slide" id="slide-5" data-speaker="To overcome these limitations, we propose AuraDX. Its core features include a dual-engine architecture providing real-time cross-validation, high-cardinality multi-class classification over 673 diseases, an ultra-compact memory footprint via gzip compression, and a modern glassmorphic web dashboard for instant sub-second triage.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 5 • Proposed Solution (1/2)</div>
+                <div class="slide-title">Proposed System & Key Features</div>
+            </div>
+            <div class="grid-4">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-code-fork" style="color:var(--accent-cyan);"></i> Dual-Engine Cross-Validation</div>
+                    <ul class="styled-list">
+                        <li>Unifies an <strong>Unstructured NLP Classifier</strong> (TF-IDF + Logistic Regression) and a <strong>Structured ML Classifier</strong> (Random Forest) side-by-side.</li>
+                        <li>Allows triage staff to compare narrative-based predictions directly against structured clinical checklist indicators.</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-network-wired" style="color:var(--accent-emerald);"></i> High-Cardinality Triage (673 Classes)</div>
+                    <ul class="styled-list">
+                        <li>Engine 2 classifies <strong>673 unique diseases</strong> from 377 binary symptom features—scaling far beyond standard 10–20 class academic toy models.</li>
+                        <li>Handles complex clinical symptom overlap with an ensemble of 50 decision trees.</li>
+                    </ul>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title"><i class="fa-solid fa-file-zipper" style="color:#3b82f6;"></i> 160x Model Compression</div>
+                    <ul class="styled-list">
+                        <li>Chunked CSV sampling (`chunksize=25,000`) avoids memory overflow during training.</li>
+                        <li>Joblib gzip level 3 compression shrinks the ensemble binary from <strong>6.6 GB down to 41.4 MB</strong>, enabling sub-second cold starts.</li>
+                    </ul>
+                </div>
+                <div class="card card-amber">
+                    <div class="card-title"><i class="fa-solid fa-gauge-high" style="color:var(--accent-amber);"></i> Glassmorphic Real-Time UI</div>
+                    <ul class="styled-list">
+                        <li>Responsive dark-mode interface with instant keyword suggestion tags.</li>
+                        <li>Renders dynamic symptom pills, cleaned text previews, and animated confidence progress bars in under 150 ms.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Algorithms Used & Application -->
+        <section class="slide" id="slide-6" data-speaker="Slide 6 details the algorithms applied in AuraDX. Model 1 uses NLTK cleaning, WordNet lemmatization, and TF-IDF vectorization with Logistic Regression, achieving 96% accuracy on 24 diseases. Model 2 uses a dynamic keyword substring scanner to generate a 1x377 binary vector, which is fed into a 50-tree Random Forest, achieving 81.6% accuracy over 673 classes.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 6 • Proposed Solution (2/2)</div>
+                <div class="slide-title">Algorithms Used & Mathematical Application</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-brain" style="color:var(--accent-cyan);"></i> Algorithm 1: NLP Narrative Classifier</div>
+                    <ul class="styled-list">
+                        <li><strong>Text Sanitation & WordNet Lemmatization:</strong> Strips punctuation via regex, converts to lowercase, filters NLTK stopwords, and reduces tokens to lemmas (e.g., <em>"vomiting" &rarr; "vomit"</em>).</li>
+                        <li><strong>TF-IDF Vectorization:</strong> Extracts unigram and bigram features (1,2 n-grams) capped at 3,000 dimensions:
+                            <br><code style="font-family:var(--font-mono); font-size:11px; color:var(--accent-cyan);">TF-IDF(t, d) = TF(t, d) &times; log(N / DF(t))</code></li>
+                        <li><strong>Multi-Class Logistic Regression:</strong> Employs L2 regularization with L-BFGS solver over 24 disease classes:
+                            <br><code style="font-family:var(--font-mono); font-size:11px; color:var(--accent-cyan);">P(y=k|x) = exp(w_k &middot; x) / &sum; exp(w_j &middot; x)</code></li>
+                        <li><strong>Performance:</strong> Achieved <strong>96.0% Test Accuracy</strong> and 96.0% Macro F1-Score.</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-tree" style="color:var(--accent-emerald);"></i> Algorithm 2: Structured ML Random Forest</div>
+                    <ul class="styled-list">
+                        <li><strong>Keyword Substring Mapper:</strong> Scans free-form user text against a dictionary of 377 verified symptom names, constructing a 1&times;377 binary vector:
+                            <br><code style="font-family:var(--font-mono); font-size:11px; color:var(--accent-emerald);">X_i = 1 if symptom in text else 0</code></li>
+                        <li><strong>Ensemble Random Forest (50 Trees):</strong> Aggregates predictions across 50 bootstrap decision trees using the Gini impurity splitting criterion:
+                            <br><code style="font-family:var(--font-mono); font-size:11px; color:var(--accent-emerald);">Gini = 1 - &sum; p_i^2</code></li>
+                        <li><strong>Label Encoding & Decoding:</strong> Maps 673 string disease targets to integers for training, and inverse-transforms integer predictions back to clinical names during inference.</li>
+                        <li><strong>Performance:</strong> Achieved <strong>81.6% Test Accuracy</strong> and 76.6% Macro Recall.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Dataset Description - NLP -->
+        <section class="slide" id="slide-7" data-speaker="Slide 7 covers our first dataset: Symptom2Disease sourced from Kaggle. It contains 1,200 perfectly balanced rows across 24 distinct illness categories. The sample table shows patient descriptions and their corresponding target labels, such as Psoriasis, Varicose veins, and Pneumonia.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 7 • Dataset Description (1/2)</div>
+                <div class="slide-title">Dataset 1: Symptom2Disease (Conversational NLP)</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-database" style="color:var(--accent-cyan);"></i> Dataset Specifications</div>
+                    <ul class="styled-list">
+                        <li><strong>Dataset Name & Source:</strong> <code>Symptom2Disease.csv</code> (Kaggle Medical NLP Repository).</li>
+                        <li><strong>Total Records & Balance:</strong> 1,200 total records, perfectly balanced with 50 samples per class.</li>
+                        <li><strong>Number of Classes:</strong> 24 unique disease categories (e.g., Psoriasis, Dengue, Typhoid, Pneumonia, Malaria, Diabetes, Arthritis).</li>
+                        <li><strong>Important Attributes:</strong>
+                            <br>• <code>label</code>: Target disease string (categorical target).
+                            <br>• <code>text</code>: Free-form conversational symptom description (feature).</li>
+                        <li><strong>Application in Project:</strong> Trains the TF-IDF and Logistic Regression pipeline to interpret patient self-reports.</li>
+                    </ul>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title"><i class="fa-solid fa-table" style="color:#3b82f6;"></i> Representative Sample (5 Rows)</div>
+                    <table class="sample-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Target Label</th>
+                                <th>Symptom Narrative (Text Feature)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td><span class="badge-pill">Psoriasis</span></td>
+                                <td>"I have been experiencing a skin rash on my arms, legs, and torso for the past few weeks. It is red, itchy, and scaly."</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><span class="badge-pill">Psoriasis</span></td>
+                                <td>"My skin has been peeling, especially on my knees, elbows, and scalp accompanied by a burning sensation."</td>
+                            </tr>
+                            <tr>
+                                <td>24</td>
+                                <td><span class="badge-pill">Varicose veins</span></td>
+                                <td>"I have noticed bulging and twisted veins on my legs. They appear blue and purple, and my legs feel heavy."</td>
+                            </tr>
+                            <tr>
+                                <td>62</td>
+                                <td><span class="badge-pill">Typhoid</span></td>
+                                <td>"I have had a high fever and chills for three days with severe stomach pain, weakness, and loss of appetite."</td>
+                            </tr>
+                            <tr>
+                                <td>118</td>
+                                <td><span class="badge-pill">Pneumonia</span></td>
+                                <td>"I have a persistent cough with green phlegm, high fever, and sharp pain in my chest whenever I breathe."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Dataset Description - Structured ML -->
+        <section class="slide" id="slide-8" data-speaker="Slide 8 presents our second dataset: disease_symptoms.csv. The raw dataset contains nearly a quarter-million rows and 378 columns. To avoid out-of-memory errors on local hardware, we sampled 19,756 records covering 673 unique diseases across 377 binary symptom flags. The table displays presence flags for headache, fever, cough, and chest pain.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 8 • Dataset Description (2/2)</div>
+                <div class="slide-title">Dataset 2: disease_symptoms.csv (Structured ML)</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-server" style="color:var(--accent-emerald);"></i> Dataset Specifications</div>
+                    <ul class="styled-list">
+                        <li><strong>Dataset Name & Source:</strong> <code>disease_symptoms.csv</code> (Kaggle Clinical Dataset).</li>
+                        <li><strong>Raw Dimensions:</strong> 246,947 rows &times; 378 columns (~190 MB on disk).</li>
+                        <li><strong>Sampled Dimensions:</strong> 19,756 representative records sampled via chunked processing (`chunksize=25,000`).</li>
+                        <li><strong>Attributes & Features:</strong>
+                            <br>• <code>diseases</code>: Target condition name (673 unique medical classes in sample).
+                            <br>• 377 Binary Columns: One-hot encoded indicators (`0` = absent, `1` = present) from <em>anxiety and nervousness</em> to <em>neck weakness</em>.</li>
+                        <li><strong>Application in Project:</strong> Trains the Random Forest ensemble for clinical checklist triage.</li>
+                    </ul>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title"><i class="fa-solid fa-table-cells" style="color:#3b82f6;"></i> Representative Sample (377 Binary Flags)</div>
+                    <table class="sample-table">
+                        <thead>
+                            <tr>
+                                <th>Target Disease</th>
+                                <th>headache</th>
+                                <th>fever</th>
+                                <th>cough</th>
+                                <th>vomiting</th>
+                                <th>chest pain</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge-pill badge-green">panic disorder</span></td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill badge-green">influenza</span></td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill badge-green">gastroenteritis</span></td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill badge-green">migraine</span></td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge-pill badge-green">pneumonia</span></td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: System Architecture Diagram -->
+        <section class="slide" id="slide-9" data-speaker="Slide 9 depicts the high-level System Architecture of AuraDX. When a user submits symptoms from the Glassmorphic web frontend, the request hits the Flask REST Controller. Flask executes two parallel inference pipelines: Branch A cleans the text with NLTK and passes it to the TF-IDF Logistic Regression model. Branch B extracts keyword matches from the 377-feature lexicon and evaluates the compressed 50-tree Random Forest. Both outputs are combined into a JSON response in sub-second time.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 9 • System Diagrams (1/2)</div>
+                <div class="slide-title">System Architecture Diagram</div>
+            </div>
+            <div style="flex:1; display:flex; flex-direction:column; gap: 16px;">
+                <div class="card" style="padding: 16px;">
+                    <div class="mermaid" style="display:flex; justify-content:center;">
+flowchart LR
+    subgraph UI ["1. Presentation Layer (Frontend)"]
+        A["Browser Dashboard (Glassmorphic UI)"]
+        A1["Textarea & Keyword Pills"]
+        A2["Animated Confidence Meters"]
+    end
+
+    subgraph Server ["2. Application Layer (Flask API)"]
+        B["Flask REST Controller (app.py)"]
+        B1["POST /api/predict"]
+    end
+
+    subgraph NLP_Pipe ["3A. Unstructured NLP Engine"]
+        C1["NLTK Preprocessing (Lemmatizer)"]
+        C2["TF-IDF Vectorizer (3,000 N-Grams)"]
+        C3["Logistic Regression (24 Diseases)"]
+    end
+
+    subgraph ML_Pipe ["3B. Structured Clinical ML Engine"]
+        D1["377 Symptom Lexicon Matcher"]
+        D2["1x377 Binary Feature Vector"]
+        D3["Random Forest Ensemble (673 Diseases)"]
+    end
+
+    subgraph Storage ["4. Storage & Persistence"]
+        E1["saved_models/ (Joblib Gzip Level 3)"]
+        E2["data/ (CSV Datasets)"]
+    end
+
+    A --> B
+    B --> C1 --> C2 --> C3
+    B --> D1 --> D2 --> D3
+    C3 --> B
+    D3 --> B
+    B --> A2
+    Storage -.->|Cold Boot Load| Server
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size: 11px;">
+                    <div class="card card-cyan" style="padding:10px;">
+                        <strong>Layer 1: Frontend</strong>
+                        <p style="color:var(--text-muted); margin-top:4px;">HTML5, modern CSS3 glassmorphism, ES6 Fetch API.</p>
+                    </div>
+                    <div class="card card-blue" style="padding:10px;">
+                        <strong>Layer 2: Flask API</strong>
+                        <p style="color:var(--text-muted); margin-top:4px;">Asynchronous REST endpoint coordinating parallel inference.</p>
+                    </div>
+                    <div class="card card-emerald" style="padding:10px;">
+                        <strong>Layer 3: Dual Models</strong>
+                        <p style="color:var(--text-muted); margin-top:4px;">Independent NLP & ML models cross-validating results.</p>
+                    </div>
+                    <div class="card card-amber" style="padding:10px;">
+                        <strong>Layer 4: Storage</strong>
+                        <p style="color:var(--text-muted); margin-top:4px;">41.4 MB compressed joblib binaries & CSV files.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Use Case Diagram -->
+        <section class="slide" id="slide-10" data-speaker="Slide 10 details our Use Case Diagram. We have three main actors: the Patient or End User, the Triage Clinician, and the Data Scientist or Administrator. Use cases include entering symptoms, selecting suggestion tags with an extend relationship, requesting dual prediction with include relationships to text lemmatization and binary keyword mapping, and administrative offline retraining and model evaluation.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 10 • System Diagrams (2/2)</div>
+                <div class="slide-title">Use Case Diagram & Actor Responsibilities</div>
+            </div>
+            <div class="grid-2">
+                <div class="card" style="padding: 16px;">
+                    <div class="mermaid" style="display:flex; justify-content:center;">
+flowchart TD
+    User((Patient / User))
+    Clinician((Triage Clinician))
+    Admin((Data Scientist))
+
+    subgraph AuraDX_System ["AuraDX Decision Support Boundary"]
+        UC1(["UC-1: Enter Symptom Text"])
+        UC2(["UC-2: Select Suggestion Pills"])
+        UC3(["UC-3: Request Dual Diagnosis"])
+        UC4(["UC-4: Clean & Lemmatize Text"])
+        UC5(["UC-5: Map 377 Binary Flags"])
+        UC6(["UC-6: View Side-by-Side Results"])
+        UC7(["UC-7: Retrain & Compress Models"])
+        UC8(["UC-8: Plot Confusion Matrix"])
+    end
+
+    User --> UC1
+    User --> UC2
+    User --> UC3
+    User --> UC6
+
+    Clinician --> UC1
+    Clinician --> UC3
+    Clinician --> UC6
+
+    Admin --> UC7
+    Admin --> UC8
+
+    UC2 -.->|&lt;&lt;extend&gt;&gt;| UC1
+    UC3 -.->|&lt;&lt;include&gt;&gt;| UC4
+    UC3 -.->|&lt;&lt;include&gt;&gt;| UC5
+    UC4 --> UC6
+    UC5 --> UC6
+    UC7 -.->|&lt;&lt;include&gt;&gt;| UC8
+                    </div>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-users" style="color:var(--accent-emerald);"></i> Actor Roles & Relationships</div>
+                    <ul class="styled-list">
+                        <li><strong>Patient / User:</strong> Interacts with the public web portal, enters free-form narrative, clicks suggested tags, and views predictions.</li>
+                        <li><strong>Triage Clinician:</strong> Auxiliary decision-support user; leverages side-by-side confidence metrics to prioritize acute patient queues.</li>
+                        <li><strong>Data Scientist / Admin:</strong> Runs <code>train_all.py</code> offline, tunes Random Forest estimators, generates evaluation confusion matrices, and maintains compressed model files.</li>
+                        <li><strong>Include / Extend Dependencies:</strong>
+                            <br>• <code>UC-2 &lt;&lt;extend&gt;&gt; UC-1</code>: Quick tags optionally append verified terms to the user textarea.
+                            <br>• <code>UC-3 &lt;&lt;include&gt;&gt; UC-4 & UC-5</code>: Every diagnostic request mandatory triggers text lemmatization and binary feature mapping before inference.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: Technologies Used -->
+        <section class="slide" id="slide-11" data-speaker="Slide 11 outlines the technologies used and system requirements. Hardware requires a minimum quad-core CPU and 4 GB RAM, with 8 to 16 GB recommended. The software stack uses Python 3.10+, Flask, Scikit-Learn, NLTK, and Joblib. For the database, we provide an academic justification: AuraDX is a stateless inference service using a file-based storage architecture with flat CSVs and serialized joblib binaries, so a traditional relational database is not needed.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 11 • Technical Specifications</div>
+                <div class="slide-title">Technologies Used & System Requirements</div>
+            </div>
+            <div class="grid-4">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-microchip" style="color:var(--accent-cyan);"></i> Hardware Requirements</div>
+                    <ul class="styled-list">
+                        <li><strong>Processor:</strong> Intel Core i3 / AMD Ryzen 3 (Quad Core) min; Intel Core i5 / AMD Ryzen 5 recommended.</li>
+                        <li><strong>RAM:</strong> 4 GB minimum; 8 GB – 16 GB DDR4 recommended for chunked training.</li>
+                        <li><strong>Storage:</strong> 1 GB free disk space (SSD recommended).</li>
+                        <li><strong>Display:</strong> Standard Full HD Monitor (1920&times;1080).</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-code" style="color:var(--accent-emerald);"></i> Software Requirements</div>
+                    <ul class="styled-list">
+                        <li><strong>Programming Language:</strong> Python 3.10 / 3.11+</li>
+                        <li><strong>Web Framework:</strong> Flask 3.0+ (WSGI Local Server)</li>
+                        <li><strong>Data Science Libraries:</strong> Scikit-Learn, NLTK, Pandas, NumPy</li>
+                        <li><strong>Model Persistence:</strong> Joblib (gzip compression level 3)</li>
+                        <li><strong>Frontend Stack:</strong> HTML5, CSS3 Glassmorphism, JavaScript ES6</li>
+                    </ul>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title"><i class="fa-brands fa-windows" style="color:#3b82f6;"></i> Operating System & Tools</div>
+                    <ul class="styled-list">
+                        <li><strong>Operating System:</strong> Windows 10 / 11 or Linux (Ubuntu 20.04+)</li>
+                        <li><strong>Development IDE:</strong> Visual Studio Code</li>
+                        <li><strong>Version Control:</strong> Git & GitHub Repository</li>
+                        <li><strong>Data Visualization:</strong> Matplotlib, Seaborn (Confusion Matrix Heatmaps)</li>
+                    </ul>
+                </div>
+                <div class="card card-amber">
+                    <div class="card-title"><i class="fa-solid fa-database" style="color:var(--accent-amber);"></i> Database Architecture Used</div>
+                    <ul class="styled-list">
+                        <li><strong>Architecture:</strong> Stateless File-Based Machine Learning Storage.</li>
+                        <li><strong>Academic Justification:</strong> AuraDX is an on-demand inference web engine with no user logins or transactional OLTP records; hence an RDBMS (MySQL/PostgreSQL) is unnecessary.</li>
+                        <li><strong>Raw Data:</strong> Flat CSV datasets stored in <code>data/</code>.</li>
+                        <li><strong>Model Weights:</strong> Compressed <code>.joblib</code> binaries stored in <code>saved_models/</code> (&lt;42 MB total).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Important System Layouts -->
+        <section class="slide" id="slide-12" data-speaker="Slide 12 showcases the important system layouts of AuraDX. On the left is the Symptom Entry Panel with suggested keyword pills and the Analyze button. On the right is the Dual Output Results Panel showing side-by-side diagnosis: Model 1 displays cleaned text, predicted disease, and confidence bar; Model 2 displays mapped symptom badges, predicted disease, and confidence bar. In addition, an interactive CLI tool and confusion matrix heatmap support clinical evaluation.">
+            <div class="slide-header">
+                <div class="slide-category">Slide 12 • System Layouts</div>
+                <div class="slide-title">Important System Layouts & User Interfaces</div>
+            </div>
+            <div class="grid-2">
+                <div class="card card-cyan">
+                    <div class="card-title"><i class="fa-solid fa-desktop" style="color:var(--accent-cyan);"></i> Layout 1: Symptom Entry & Suggestion Panel</div>
+                    <div class="mockup-box" style="margin-bottom:12px;">
+                        <div style="color:var(--accent-cyan); font-weight:700; margin-bottom:6px;"><i class="fa-solid fa-notes-medical"></i> AuraDX Symptom Entry</div>
+                        <div style="background:#1e293b; padding:8px; border-radius:6px; color:#94a3b8; font-size:10.5px; margin-bottom:8px;">
+                            "I have a runny nose, sore throat and mild fever since yesterday..."
+                        </div>
+                        <div style="font-size:10px; color:var(--text-muted); margin-bottom:4px;">Suggested Keywords:</div>
+                        <div style="display:flex; gap:4px; flex-wrap:wrap;">
+                            <span class="badge-pill">headache</span>
+                            <span class="badge-pill">vomiting</span>
+                            <span class="badge-pill">fever</span>
+                            <span class="badge-pill">cough</span>
+                            <span class="badge-pill">shortness of breath</span>
+                        </div>
+                    </div>
+                    <ul class="styled-list">
+                        <li><strong>Purpose:</strong> Accepts natural language patient narratives and provides quick-add pill tags to ensure clinical terms are included for structured mapping.</li>
+                        <li><strong>Controls:</strong> Interactive "Analyze Symptoms" button with animated loading spinner to prevent duplicate submissions.</li>
+                    </ul>
+                </div>
+                <div class="card card-emerald">
+                    <div class="card-title"><i class="fa-solid fa-chart-column" style="color:var(--accent-emerald);"></i> Layout 2: Dual-Model Results Dashboard</div>
+                    <div class="mockup-box" style="margin-bottom:12px;">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                            <div style="background:#1e293b; padding:8px; border-radius:6px; border-left:3px solid var(--accent-cyan);">
+                                <div style="color:var(--accent-cyan); font-size:10px; font-weight:700;">MODEL 1: NLP</div>
+                                <div style="font-size:12px; font-weight:700; color:#fff; margin-top:2px;">Allergy</div>
+                                <div style="font-size:9.5px; color:var(--text-muted);">Confidence: 96.0%</div>
+                                <div style="height:4px; background:#334155; border-radius:2px; margin-top:4px;"><div style="width:96%; height:100%; background:var(--accent-cyan); border-radius:2px;"></div></div>
+                            </div>
+                            <div style="background:#1e293b; padding:8px; border-radius:6px; border-left:3px solid var(--accent-emerald);">
+                                <div style="color:var(--accent-emerald); font-size:10px; font-weight:700;">MODEL 2: ML</div>
+                                <div style="font-size:12px; font-weight:700; color:#fff; margin-top:2px;">Influenza</div>
+                                <div style="font-size:9.5px; color:var(--text-muted);">Confidence: 81.6%</div>
+                                <div style="height:4px; background:#334155; border-radius:2px; margin-top:4px;"><div style="width:82%; height:100%; background:var(--accent-emerald); border-radius:2px;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="styled-list">
+                        <li><strong>Purpose:</strong> Directly visualizes side-by-side diagnostic predictions, extracted clinical keywords, and animated confidence meters.</li>
+                        <li><strong>Auxiliary Layouts:</strong> Includes interactive terminal CLI (<code>predict.py</code>) and confusion matrix evaluation heatmap (<code>confusion_matrix_nlp.png</code>).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Speaker Drawer -->
+    <div id="speaker-drawer" class="speaker-drawer">
+        <div class="speaker-header">
+            <span><i class="fa-solid fa-microphone"></i> Speaker Script / Notes</span>
+            <span style="font-size:10px; cursor:pointer;" onclick="toggleSpeakerNotes()">[Close ESC]</span>
+        </div>
+        <div id="speaker-content" class="speaker-text">
+            Welcome to AuraDX presentation.
+        </div>
+    </div>
+
+    <!-- Bottom Status Bar -->
+    <footer class="bottom-bar">
+        <div>Department of Computer Science & Data Science • Nowrosjee Wadia College, Pune</div>
+        <div>Press <strong>Left/Right Arrow</strong> to navigate • <strong>N</strong> for Notes • <strong>F</strong> for Fullscreen</div>
+    </footer>
+
+    <!-- Presentation Engine Script -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach((s, idx) => {
+                s.classList.remove('active');
+                if (idx + 1 === currentSlide) {
+                    s.classList.add('active');
+                    const notes = s.getAttribute('data-speaker') || 'No notes for this slide.';
+                    document.getElementById('speaker-content').innerHTML = `<strong>Presenter Notes:</strong> ${notes}`;
+                }
+            });
+            document.getElementById('slide-num').innerText = `${currentSlide} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function toggleSpeakerNotes() {
+            const drawer = document.getElementById('speaker-drawer');
+            drawer.classList.toggle('show');
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'n') {
+                toggleSpeakerNotes();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            } else if (e.key === 'Escape') {
+                document.getElementById('speaker-drawer').classList.remove('show');
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>

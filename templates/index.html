@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA-DX | Clinical Decision Support Dashboard</title>
+    <!-- Google Fonts: Outfit (modern sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-notes-medical"></i>
+                <span>Aura<span>DX</span></span>
+            </div>
+            <div class="badge">Decision Support Trial v1.0</div>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <div class="dashboard-grid">
+            <!-- Left Input Panel -->
+            <section class="card input-panel">
+                <div class="panel-header">
+                    <h2>Symptom Entry</h2>
+                    <p>Describe what you are experiencing in free-form English.</p>
+                </div>
+                <div class="input-container">
+                    <textarea id="symptoms-input" placeholder="Example: I've been having a severe headache, nausea, and sharp chest pains since yesterday morning..."></textarea>
+                </div>
+                <div class="symptom-tips">
+                    <h4><i class="fa-solid fa-lightbulb"></i> Suggested Keywords:</h4>
+                    <div class="tags">
+                        <span class="tip-tag">headache</span>
+                        <span class="tip-tag">vomiting</span>
+                        <span class="tip-tag">fever</span>
+                        <span class="tip-tag">cough</span>
+                        <span class="tip-tag">shortness of breath</span>
+                        <span class="tip-tag">nausea</span>
+                        <span class="tip-tag">back pain</span>
+                    </div>
+                </div>
+                <button id="analyze-btn" class="btn btn-primary">
+                    <span id="btn-text"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Symptoms</span>
+                    <span id="btn-spinner" class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i> Analyzing...</span>
+                </button>
+            </section>
+
+            <!-- Right Results Panel -->
+            <section class="results-panel">
+                <!-- Welcome Screen (Visible by default) -->
+                <div id="welcome-state" class="card empty-state">
+                    <i class="fa-solid fa-stethoscope"></i>
+                    <h3>Ready for Diagnosis</h3>
+                    <p>Enter patient symptom descriptions in the left panel and click "Analyze Symptoms" to evaluate predictions from both models side-by-side.</p>
+                </div>
+
+                <!-- Results Output Screen (Hidden by default) -->
+                <div id="results-state" class="results-container hidden">
+                    <!-- Model 1 (NLP) -->
+                    <div class="card result-card nlp-card">
+                        <div class="result-badge nlp-badge">Model 1: NLP Classifier</div>
+                        <div class="result-body">
+                            <div class="cleaned-box">
+                                <span class="label">Cleaned Text:</span>
+                                <span id="nlp-cleaned" class="value">-</span>
+                            </div>
+                            <div class="prediction-info">
+                                <h3>Predicted Disease</h3>
+                                <div id="nlp-prediction" class="predicted-name">-</div>
+                            </div>
+                            <div class="meter-container">
+                                <div class="meter-header">
+                                    <span>Confidence</span>
+                                    <span id="nlp-confidence-lbl">0%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div id="nlp-confidence-bar" class="meter-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model 2 (ML) -->
+                    <div class="card result-card ml-card">
+                        <div class="result-badge ml-badge">Model 2: Structured ML</div>
+                        <div class="result-body">
+                            <div class="symptoms-mapping-box">
+                                <span class="label">Mapped Symptoms:</span>
+                                <div id="ml-mapped-symptoms" class="mapped-tags">
+                                    <!-- Dynamic symptom tags -->
+                                </div>
+                            </div>
+                            <div class="prediction-info">
+                                <h3>Predicted Disease</h3>
+                                <div id="ml-prediction" class="predicted-name">-</div>
+                            </div>
+                            <div class="meter-container">
+                                <div class="meter-header">
+                                    <span>Confidence</span>
+                                    <span id="ml-confidence-lbl">0%</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div id="ml-confidence-bar" class="meter-fill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><i class="fa-solid fa-circle-exclamation"></i> <strong>Disclaimer:</strong> This is a decision-support learning experiment and not a clinically validated diagnostic tool. Always consult a certified healthcare professional for medical emergencies or diagnostics.</p>
+        </footer>
+    </div>
+
+    <!-- Script file -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
